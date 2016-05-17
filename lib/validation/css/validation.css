@@ -1,0 +1,11 @@
+@CHARSET "UTF-8";
+
+#error_con ul li{
+	padding:4px;
+	font-size:12px;
+	font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,STHeiti,"Microsoft Yahei",sans-serif;
+}
+.invalid{
+	color: #ff0000;
+	
+}

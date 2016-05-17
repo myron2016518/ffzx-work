@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>AdminLTE 2 | Dashboard</title>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+<link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+<link rel="stylesheet" href="plugins/iCheck/flat/blue.css">
+<link rel="stylesheet" href="plugins/morris/morris.css">
+<link rel="stylesheet" href="plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+<link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
+<link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css">
+<link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+  <header class="main-header"> <a href="index2.html" class="logo"> <span class="logo-mini"><b>A</b>LT</span> <span class="logo-lg"><img src="images/logo.png" alt=""/></span> </a>
+    <nav class="navbar navbar-static-top" role="navigation"> <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button"> <span class="sr-only">Toggle navigation</span> </a>
+      <div class="header-nav">
+          <ul>
+              <li><a href="#" class="active">基础平台</a> </li>
+              <li><a href="#">办公平台</a> </li>
+              <li><a href="#">通讯平台</a> </li>
+              <li><a href="#">人事管理</a> </li>
+              <li><a href="#">考勤管理</a> </li>
+              <li><a href="#">电商基础</a> </li>
+              <li><a href="#">电商仓储</a> </li>
+              <li><a href="#">电商网站</a> </li>
+              <li><a href="#">BT报表</a> </li>
+          </ul>
+      </div>
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <li class="dropdown user user-menu"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image"> <span class="hidden-xs">Alexander Pierce</span> </a>
+            <ul class="dropdown-menu">
+              <li class="user-header"> <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <p>admin</p>
+              </li>
+              <li class="user-footer">
+                <div class="pull-left"> <a href="#" class="btn btn-default btn-flat">个人中心</a> </div>
+                <div class="pull-right"> <a href="#" class="btn btn-default btn-flat">注销</a> </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <aside class="main-sidebar">
+    <section class="sidebar">
+      <ul class="sidebar-menu">
+        <li class="active treeview"> <a href="#"> <i class="fa fa-dashboard"></i> <span>基础资料</span> <i class="fa fa-angle-left pull-right"></i> </a>
+          <ul class="treeview-menu">
+            <li class="active"><a href="#"><i class="fa fa-circle-o"></i>通用资料</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i>银行网点</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i>资金账户</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i>片区管理</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i>城市管理</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i>客户来源</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i>业务标签</a></li>
+          </ul>
+        </li>
+        <li class="treeview"> <a href="#"> <i class="fa fa-files-o"></i> <span>菜单管理</span> </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Boxed</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Fixed</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
+          </ul>
+        </li>
+        <li> <a href="#"><i class="fa fa-edit"></i><span>组织管理</span></a> </li>
+        <li class="treeview"> <a href="#"> <i class="fa fa-files-o"></i><span>岗位管理</span></a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-circle-o"></i> ChartJS</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Morris</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Flot</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Inline charts</a></li>
+          </ul>
+        </li>
+        <li class="treeview"> <a href="#"> <i class="fa fa-files-o"></i><span>职员管理</span> </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-circle-o"></i> General</a></li>
+          </ul>
+        </li>
+        <li class="treeview"> <a href="#"> <i class="fa fa-laptop"></i><span>系统设置</span> </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-circle-o"></i> General</a></li>
+          </ul>
+        </li>
+        <li class="treeview"> <a href="#"> <i class="fa fa-folder"></i><span>页面配置</span> </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-circle-o"></i> General</a></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+  </aside>
+  <div class="content-wrapper">
+    <div class="content">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="centernav1">
+            <ul class="alert-list-ul nav nav-tabs">
+              <li class="active"><a href="#" class="alert">个人信息 <button type="button" class="close" data-dismiss="alert">&times;</button> </a></li>
+              <li class=""><a href="#">文件管理 <button type="button" class="close" data-dismiss="alert">&times;</button> </a></li>
+              <li class=""><a href="#">内容发布 <button type="button" class="close" data-dismiss="alert">&times;</button> </a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box-body">
+            <div class="tab-content">
+                <div class="wrapper-html">
+                    <!--查询表单样式--start-->
+                    <div class="search">
+                        <form>
+                            <div class="inquire-ul" style="margin-top: 0;">
+                                <div class="form-tr">
+                                    <div class="form-td">
+                                        <label>账号：</label>
+                                        <div class="div-form"><input id="" class="form-control txt_mid input-sm" type="text" placeholder=""></div>
+                                    </div>
+                                    <div class="form-td">
+                                        <label>日期范围：</label>
+                                        <div class="div-form"><input id="" class="form-control txt_mid2 input-sm" type="date" placeholder="">-<input id="" class="form-control txt_mid2 input-sm" type="date" placeholder=""></div>
+                                    </div>
+                                    <div class="form-td">
+                                        <label>下单时间：</label>
+                                        <div class="div-form"><input id="" class="form-control txt_mid input-sm" type="date" placeholder=""></div>
+                                    </div>
+                                    <div class="form-td">
+                                        <label>退单时间：</label>
+                                        <div class="div-form"><input id="" class="form-control txt_mid input-sm" type="date" placeholder=""></div>
+                                    </div>
+                                    <div class="form-td">
+                                        <label>请选择拣货员：</label>
+                                        <div class="div-form"><select class="sel_mid"><option>-请选择拣货员-</option></select></div>
+                                    </div>
+                                    <div class="form-td">
+                                        <label>开始金额：</label>
+                                        <div class="div-form"><input id="" class="form-control txt_mid input-sm" type="text" placeholder=""></div>
+                                    </div>
+                                    <div class="form-td">
+                                        <label>结束金额：</label>
+                                        <div class="div-form"><input id="" class="form-control txt_mid input-sm" type="text" placeholder=""></div>
+                                    </div>
+                                    <div class="form-td">
+                                        <label>确认收货时间：</label>
+                                        <div class="div-form"><input id="" class="form-control txt_mid input-sm" type="date" placeholder=""></div>
+                                    </div>
+                                    <div class="form-td">
+                                        <label>支付时间：</label>
+                                        <div class="div-form"><input id="" class="form-control txt_mid input-sm" type="date" placeholder=""></div>
+                                    </div>
+                                    <div class="form-td">
+                                        <label>请选择配送员：</label>
+                                        <div class="div-form"><select class="sel_mid"><option>-请选择拣货员-</option></select></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="btn-div3">
+                                <button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-search"></i>&nbsp;&nbsp;查询</button>
+                                <a class="btn btn-primary btn-sm" href="#"><i class="fa fa-plus"></i>&nbsp;&nbsp;添加</a>
+                            </div>
+                        </form>
+                    </div>
+                    <!--查询表单样式--end-->
+                </div>
+                <div class="wrapper-html">
+                    <!--表格修改2--start-->
+                    <table class="table table-hover table-striped bor2 table-common">
+                        <colgroup>
+                            <col width="2%">
+                            <col width="2%">
+                            <col width="10%">
+                            <col width="10%">
+                            <col width="15%">
+                            <col width="10%">
+                            <col width="10%">
+                            <col width="15%">
+                            <col width="15%">
+                            <col width="21%">
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th width="1px"></th>
+                            <th width="15px"><input type="checkbox"></th>
+                            <th>用户名</th>
+                            <th>手机号码</th>
+                            <th>邮件</th>
+                            <th class="tab-td-center">是否控制城市</th>
+                            <th class="tab-td-center">是否禁用</th>
+                            <th>最后登录时间</th>
+                            <th>创建时间</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><input type="checkbox"></td>
+                            <td>admin</td>
+                            <td>13700000000</td>
+                            <td>admin@qq.com</td>
+                            <td align="center">是</td>
+                            <td align="center">否</td>
+                            <td>2016-01-02 18:41:11</td>
+                            <td>2016-01-02 18:41:11</td>
+                            <td><a href="#">编辑</a> | <a href="#">删除</a> | <a href="#">分配权限</a></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><input type="checkbox"></td>
+                            <td>admin</td>
+                            <td>13700000000</td>
+                            <td>admin@qq.com</td>
+                            <td align="center">是</td>
+                            <td align="center">否</td>
+                            <td>2016-01-02 18:41:11</td>
+                            <td>2016-01-02 18:41:11</td>
+                            <td><a href="#">编辑</a> | <a href="#">删除</a> | <a href="#">分配权限</a></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><input type="checkbox"></td>
+                            <td>admin</td>
+                            <td>13700000000</td>
+                            <td>admin@qq.com</td>
+                            <td align="center">是</td>
+                            <td align="center">否</td>
+                            <td>2016-01-02 18:41:11</td>
+                            <td>2016-01-02 18:41:11</td>
+                            <td><a href="#">编辑</a> | <a href="#">删除</a> | <a href="#">分配权限</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!--表格修改2--end-->
+                </div>
+                <div class="wrapper-html">
+                    <!--分页--start-->
+                    <div class="dataTables_paginate paging_simple_numbers  col-md-12" id="example2_paginate">
+                        <ul class="pagination">
+                            <li class="paginate_button previous disabled" id="example2_previous"><a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0"><< 上一页</a></li>
+                            <li class="paginate_button active"><a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0">1</a></li>
+                            <li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0">2</a></li>
+                            <li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0">3</a></li>
+                            <li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0">4</a></li>
+                            <li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0">5</a></li>
+                            <li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0">6</a></li>
+                            <li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0">....</a></li>
+                            <li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0">30</a></li>
+                            <li class="paginate_button next" id="example2_next"><a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0">下一页 >></a></li>
+                            <li class="paginate_text">当前 1/30 页，共 300 条</li>
+                        </ul>
+                    </div>
+                    <!--分页--end-->
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="main-footer">
+    <div class="pull-right hidden-xs"> <b>Version</b> 2.3.0 </div>
+    Copyright © 2016 粤ICP备15067190号-3 深圳市非凡之星网络科技有限公司版权所有 </footer>
+  <aside class="control-sidebar control-sidebar-dark">
+    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+      <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane" id="control-sidebar-home-tab">
+        <h3 class="control-sidebar-heading">Recent Activity</h3>
+        <ul class="control-sidebar-menu">
+          <li> <a href="javascript::;"> <i class="menu-icon fa fa-birthday-cake bg-red"></i>
+            <div class="menu-info">
+              <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
+              <p>Will be 23 on April 24th</p>
+            </div>
+            </a> </li>
+          <li> <a href="javascript::;"> <i class="menu-icon fa fa-user bg-yellow"></i>
+            <div class="menu-info">
+              <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
+              <p>New phone +1(800)555-1234</p>
+            </div>
+            </a> </li>
+          <li> <a href="javascript::;"> <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
+            <div class="menu-info">
+              <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
+              <p>nora@example.com</p>
+            </div>
+            </a> </li>
+          <li> <a href="javascript::;"> <i class="menu-icon fa fa-file-code-o bg-green"></i>
+            <div class="menu-info">
+              <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
+              <p>Execution time 5 seconds</p>
+            </div>
+            </a> </li>
+        </ul>
+        <!-- /.control-sidebar-menu -->
+        
+        <h3 class="control-sidebar-heading">Tasks Progress</h3>
+        <ul class="control-sidebar-menu">
+          <li> <a href="javascript::;">
+            <h4 class="control-sidebar-subheading"> Custom Template Design <span class="label label-danger pull-right">70%</span> </h4>
+            <div class="progress progress-xxs">
+              <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
+            </div>
+            </a> </li>
+          <li> <a href="javascript::;">
+            <h4 class="control-sidebar-subheading"> Update Resume <span class="label label-success pull-right">95%</span> </h4>
+            <div class="progress progress-xxs">
+              <div class="progress-bar progress-bar-success" style="width: 95%"></div>
+            </div>
+            </a> </li>
+          <li> <a href="javascript::;">
+            <h4 class="control-sidebar-subheading"> Laravel Integration <span class="label label-warning pull-right">50%</span> </h4>
+            <div class="progress progress-xxs">
+              <div class="progress-bar progress-bar-warning" style="width: 50%"></div>
+            </div>
+            </a> </li>
+          <li> <a href="javascript::;">
+            <h4 class="control-sidebar-subheading"> Back End Framework <span class="label label-primary pull-right">68%</span> </h4>
+            <div class="progress progress-xxs">
+              <div class="progress-bar progress-bar-primary" style="width: 68%"></div>
+            </div>
+            </a> </li>
+        </ul>
+        <!-- /.control-sidebar-menu --> 
+        
+      </div>
+      <!-- /.tab-pane --> 
+      <!-- Stats tab content -->
+      <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
+      <!-- /.tab-pane --> 
+      <!-- Settings tab content -->
+      <div class="tab-pane" id="control-sidebar-settings-tab">
+        <form method="post">
+          <h3 class="control-sidebar-heading">General Settings</h3>
+          <div class="form-group">
+            <label class="control-sidebar-subheading"> Report panel usage
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+            <p> Some information about this general settings option </p>
+          </div>
+          <!-- /.form-group -->
+          
+          <div class="form-group">
+            <label class="control-sidebar-subheading"> Allow mail redirect
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+            <p> Other sets of options are available </p>
+          </div>
+          <!-- /.form-group -->
+          
+          <div class="form-group">
+            <label class="control-sidebar-subheading"> Expose author name in posts
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+            <p> Allow the user to show his name in blog posts </p>
+          </div>
+          <!-- /.form-group -->
+          
+          <h3 class="control-sidebar-heading">Chat Settings</h3>
+          <div class="form-group">
+            <label class="control-sidebar-subheading"> Show me as online
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+          </div>
+          <!-- /.form-group -->
+          
+          <div class="form-group">
+            <label class="control-sidebar-subheading"> Turn off notifications
+              <input type="checkbox" class="pull-right">
+            </label>
+          </div>
+          <!-- /.form-group -->
+          
+          <div class="form-group">
+            <label class="control-sidebar-subheading"> Delete chat history <a href="javascript::;" class="text-red pull-right"><i class="fa fa-trash-o"></i></a> </label>
+          </div>
+          <!-- /.form-group -->
+        </form>
+      </div>
+      <!-- /.tab-pane --> 
+    </div>
+  </aside>
+  <!-- /.control-sidebar --> 
+  <!-- Add the sidebar's background. This div must be placed
+           immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper --> 
+
+<!-- jQuery 2.1.4 --> 
+<script src="plugins/jQuery/jQuery-2.1.4.min.js"></script> 
+<!-- jQuery UI 1.11.4 --> 
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script> 
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip --> 
+<script>
+      $.widget.bridge('uibutton', $.ui.button);
+    </script> 
+<!-- Bootstrap 3.3.5 --> 
+<script src="bootstrap/js/bootstrap.min.js"></script> 
+<!-- Morris.js charts --> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script> 
+<script src="plugins/morris/morris.min.js"></script> 
+<!-- Sparkline --> 
+<script src="plugins/sparkline/jquery.sparkline.min.js"></script> 
+<!-- jvectormap --> 
+<script src="plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script> 
+<script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script> 
+<!-- jQuery Knob Chart --> 
+<script src="plugins/knob/jquery.knob.js"></script> 
+<!-- daterangepicker --> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script> 
+<script src="plugins/daterangepicker/daterangepicker.js"></script> 
+<!-- datepicker --> 
+<script src="plugins/datepicker/bootstrap-datepicker.js"></script> 
+<!-- Bootstrap WYSIHTML5 --> 
+<script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script> 
+<!-- Slimscroll --> 
+<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script> 
+<!-- FastClick --> 
+<script src="plugins/fastclick/fastclick.min.js"></script> 
+<!-- AdminLTE App --> 
+<script src="dist/js/app.min.js"></script> 
+<!-- AdminLTE dashboard demo (This is only for demo purposes) --> 
+<script src="dist/js/pages/dashboard.js"></script> 
+<!-- AdminLTE for demo purposes --> 
+<script src="dist/js/demo.js"></script>
+</body>
+</html>
