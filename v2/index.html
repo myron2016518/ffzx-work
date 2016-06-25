@@ -1,0 +1,2555 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1">
+  <title>SuperStar UI v0.5</title>
+
+  <!-- Set render engine for 360 browser -->
+  <meta name="renderer" content="webkit">
+
+  <!-- No Baidu Siteapp-->
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+
+  <link rel="icon" type="image/png" href="img/favicon.png">
+
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="icon" sizes="192x192" href="img/icon72x72@2x.png">
+
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="FFZX CMS"/>
+  <link rel="apple-touch-icon-precomposed" href="img/icon72x72@2x.png">
+
+  <!-- Tile icon for Win8 (144x144 + tile color) -->
+  <meta name="msapplication-TileImage" content="img/icon72x72@2x.png">
+  <meta name="msapplication-TileColor" content="#0e90d2">  
+
+  <link rel="stylesheet" href="css/base.css">
+
+  <style>
+	body{margin:1em;overflow-x:hidden;}	
+	.wrapper-component{padding-bottom:50px;margin-bottom:50px;border-bottom:1px dashed #ff4848;}
+	.wrapper-html, .wrapper-component > h3{margin-bottom:20px;}
+	.wrapper-html,.wrapper-btn{float:left;width:100%;}
+	h2{margin-bottom:30px;}
+	.nav-tabs,.wrapper-btn{margin-bottom:20px;overflow:hidden;}	
+	textarea.copy-html{height:12em;margin-top:20px;}
+	pre{min-height:12em;margin-top:20px;}
+	.wrapper-ref{margin-top:20px;}
+	.alert-success{margin:0 15px 0 15px;margin-bottom:0;padding:6px 12px;display:none;}
+  </style>
+	<!--[if (gte IE 9)|!(IE)]><!-->
+	<script src="js/jquery/jquery-2.2.3.min.js"></script>
+	<!--<![endif]-->
+	
+	<!--[if lte IE 8 ]>
+	<script src="js/jquery/jquery-1.12.3.min.js"></script>
+	<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+	<script src="js/util/polyfill.js"></script>
+	<![endif]-->
+	
+	<script src="js/require/require.js"></script>
+	<script src="js/common/common.js"></script>
+	<script src="js/util/ajaxUtils.js"></script>
+	
+	<script>
+		var alertInited = function(e){
+			var $alert = $(e).next('.alert');
+			$alert.fadeIn(function(){
+				setTimeout(function(){ $alert.fadeOut() }, 1500)
+			});
+		};
+		
+		var funcLoadSource = function(){
+			
+			var $wrapperComponent = $(this).closest('.wrapper-component');
+			var $js = $wrapperComponent.find('pre');
+			
+			if ($js.length != 0) return false;
+			
+			var sourceWrapper = '<textarea class="form-control copy-html" style="display:none;"></textarea><pre class="prettyprint" style="display:none;"></pre>';
+			var sourceBtn = '<span class="alert alert-success pull-left" role="alert"><strong>Well done! It is working now :)</strong></span><a href="#" class="btn btn-default pull-right">UP</a>';
+			
+			$wrapperComponent.find('.wrapper-btn').after(sourceWrapper);
+			$wrapperComponent.find('.btn-init').after(sourceBtn);
+			
+			var	html = $.trim($wrapperComponent.find('.wrapper-html').html());
+			if (html != '') $wrapperComponent.find('.copy-html').val(html).show();
+			
+			var js = $.trim($wrapperComponent.find('>script').html());			
+			if (js != '') {
+				$wrapperComponent.find('pre').html(js).show();
+				PR.prettyPrint();
+			}
+			
+			alertInited(this);			
+		};
+		
+		$(document).on('click', '.btn-init', funcLoadSource);
+	</script>	
+</head>
+<body>
+<div class="container-fluid row">
+	<div class="col-md-2">
+		<div class="page-header">
+		  <h1>SuperStar UI <small>v0.5</small></h1>
+		</div>
+		
+		<div class="panel panel-default">
+		  <div class="panel-heading"><strong>FFZX (HTML)</strong></div>
+		  <div class="list-group">
+			<a class="list-group-item" href="ffzx/index.html" target="_blank">All Templates</a>
+			<a class="list-group-item" href="ffzx/iframe.html" target="_blank">Iframe</a>
+		  </div>
+		</div>
+		
+		<div class="panel panel-default">
+		  <div class="panel-heading"><strong>FFZX (FF)</strong></div>
+		  <div class="panel-body">
+			<p>Some will not work until you click on the <mark>"Init .Blabla()"</mark> button.</p>
+		  </div>
+
+		  <div class="list-group">
+			<a class="list-group-item" href="#ffArtDialog">artDialog</a>
+			<a class="list-group-item" href="#ffCookie">Cookie</a>
+			<a class="list-group-item" href="#ffDataTable">dataTable</a>
+			<a class="list-group-item" href="#ffiCheck">iCheck</a>
+			<a class="list-group-item" href="#ffJQueryValidation">jQuery Validation</a>
+			<a class="list-group-item" href="#ffSelect2">Select2</a>			
+			<a class="list-group-item" href="#ffTreetable">treeTable</a>
+			<a class="list-group-item" href="#ffUEditor">UEditor</a>			
+			<a class="list-group-item" href="#ffWebUploader">WebUploader</a>
+			<a class="list-group-item" href="#ffZtree">zTree</a>			
+		  </div>
+		</div>
+		
+		<div class="panel panel-default">
+		  <div class="panel-heading"><strong>Bootstrap (BS)</strong></div>
+		  <div class="panel-body">
+			<p>It will not work until you click on its <mark>"Init .<strong>bs</strong>Blabla()"</mark> button.</p>
+		  </div>
+
+		  <div class="list-group">
+			<a class="list-group-item" href="#bsAffix">BS Affix</a>
+			<a class="list-group-item" href="#bsAlert">BS Alert</a>
+			<a class="list-group-item" href="#bsButton">BS Button</a>
+			<a class="list-group-item" href="#bsCarousel">BS Carousel</a>
+			<a class="list-group-item" href="#bsCollapse">BS Collapse</a>
+			<a class="list-group-item" href="#bsDropdown">BS Dropdown</a>
+			<a class="list-group-item" href="#bsModal">BS Modal</a>
+			<a class="list-group-item" href="#bsPopover">BS Popover</a>
+			<a class="list-group-item" href="#bsTab">BS Tab</a>
+			<a class="list-group-item" href="#bsTooltip">BS Tooltip</a>
+		  </div>
+		</div>
+		
+		<div class="panel panel-default">
+		  <div class="panel-heading"><strong>jQuery UI (JQ)</strong></div>
+		  <div class="panel-body">
+			<p>It will not work until you click on its <mark>"Init .Blabla()"</mark> button. Don't need any prefix!</p>
+		  </div>
+
+		  <div class="list-group">
+			<a class="list-group-item" href="#jqAccordion">Accordion</a>
+			<a class="list-group-item" href="#jqAutocomplete">Autocomplete</a>			
+			<a class="list-group-item" href="#jqButton">Button</a>
+			<a class="list-group-item" href="#jqDatepicker">Datepicker</a>
+			<a class="list-group-item" href="#jqDialog">Dialog</a>
+			<a class="list-group-item" href="#jqMenu">Menu</a>
+			<a class="list-group-item" href="#jqProgressbar">Progressbar</a>
+			<a class="list-group-item" href="#jqSelectmenu">Selectmenu</a>
+			<a class="list-group-item" href="#jqSlider">Slider</a>
+			<a class="list-group-item" href="#jqSpinner">Spinner</a>
+			<a class="list-group-item" href="#jqTabs">Tabs</a>
+			<a class="list-group-item" href="#jqTooltip">Tooltip</a>
+			<a class="list-group-item" href="#jqDraggable">Draggable</a>
+			<a class="list-group-item" href="#jqDroppable">Droppable</a>
+			<a class="list-group-item" href="#jqResizable">Resizable</a>
+			<a class="list-group-item" href="#jqSelectable">Selectable</a>
+			<a class="list-group-item" href="#jqSortable">Sortable</a>
+		  </div>
+		</div>
+
+		<a href="#changyan" class="btn btn-success btn-block">我有（yao）需（tu）求（cao）</a>
+		
+	</div>
+	
+	<div class="col-md-10 col-right">	
+
+
+
+
+
+
+<h2>FFZX Components</h2>
+
+
+
+<div class="wrapper-component">
+<a name="ffArtDialog"></a>
+<h3>dialog()</h3>
+<div class="wrapper-html">
+
+<!-- artDialog HTML -->
+
+<button type="button" class="btn btn-info" id="btn_artDialog_native">Native artDialog</button>
+<button type="button" class="btn btn-info" id="btn_artDialog_custom">Custom artDialog</button>
+
+<!-- END: artDialog HTML -->
+
+</div>
+
+<script>$(document).ready(function(){
+		
+	// Native
+	$('#btn_artDialog_native').on('click', function(){
+		requirejs(['ff/dialog'], function() {
+			dialog({
+				title: '欢迎',
+				content: '欢迎使用 artDialog 对话框组件！'
+			}).show();
+		});
+	});
+	
+	// Custom
+	$('#btn_artDialog_custom').on('click', function(){
+			
+		requirejs(['frontEngineDialog'], function() {
+			var callback=function(){
+				dialog({quickClose: true,content: '成功'}).show();
+			};
+			//$.frontEngineDialog.executeIframeDialog('add','新增用户','artDialogTest2.html','100%','400');
+			$.frontEngineDialog.executeDialog('add','新增用户','陈文明','100%','100%',function(){
+				dialog({content: '成功',quickClose: true}).show();
+			});
+			//$.frontEngineDialog.executeDialog('add','新增用户','陈文明','100%','100%',callback);
+			//$.frontEngineDialog.executeDialogOK('新增用户','成功！');
+			//$.frontEngineDialog.executeDialogContentTime('出错啦！', 2000);
+			//$.frontEngineDialog.executeDialogContent('提示','出错啦！');
+		});	
+		
+	});
+	
+});</script>
+
+	<div class="wrapper-btn">
+		<button class="btn btn-warning pull-left btn-init" type="button">View source for <b>dialog()</b></button>
+	</div>
+	<div class="wrapper-ref">
+	Ref: <a href="http://aui.github.io/artDialog/doc/" target="_blank">http://aui.github.io/artDialog/doc/</a>
+	</div>
+
+</div>
+
+
+
+
+
+<div class="wrapper-component">
+<a name="ffCookie"></a>
+<h3>.cookie()</h3>
+<div class="wrapper-html">
+
+<!-- Cookie HTML -->
+
+No HTML needed.
+
+<!-- END: Cookie HTML -->
+
+</div>
+
+<script>$(document).ready(function(){
+
+	$('#btn_ffCookie').on('click', function(){
+
+		requirejs(['ff/cookie'], function(){
+
+			// Create session cookie
+			$.cookie('ffzx', 'SuperStar');
+			$.cookie('name', 'value');
+			
+			// Create expiring cookie, 7 days from then
+			$.cookie('name', 'value', { expires: 7 });
+			
+			// Create expiring cookie, valid across entire site:
+			$.cookie('name', 'value', { expires: 7, path: '/' });
+			
+			// Read cookie
+			$.cookie('name'); // => "value"
+			$.cookie('nothing'); // => undefined
+			
+			// Read all available cookies
+			$.cookie(); // => { "name": "value" }
+			
+			// Delete cookie
+			// Returns true when cookie was successfully deleted, otherwise false
+			$.removeCookie('name'); // => true
+			$.removeCookie('nothing'); // => false
+
+			// Need to use the same attributes (path, domain) as what the cookie was written with
+			$.cookie('name', 'value', { path: '/' });
+			// This won't work!
+			$.removeCookie('name'); // => false
+			// This will work!
+			$.removeCookie('name', { path: '/' }); // => true
+		});
+		
+	});
+
+});</script>
+
+<div class="wrapper-btn">
+	<button id="btn_ffCookie"  class="btn btn-warning pull-left btn-init" type="button">Init <b>.cookie()</b></button>
+</div>
+<div class="wrapper-ref">
+	Ref: <a href="https://github.com/carhartl/jquery-cookie" target="_blank">https://github.com/carhartl/jquery-cookie</a>
+</div>
+
+</div>
+
+
+
+<div class="wrapper-component">
+<a name="ffDataTable"></a>
+<h3>.DataTable()</h3>
+<div class="wrapper-html">
+
+<!-- DataTable HTML -->
+
+<table id="ff_DataTable" class="table table-striped table-bordered">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Position</th>
+			<th>Office</th>
+			<th>Extn.</th>
+			<th>Start date</th>
+			<th>Salary</th>
+		</tr>
+	</thead>
+</table>
+
+<!-- END: DataTable HTML -->
+
+</div>
+
+<script>$(document).ready(function(){
+
+	$('#btn_ffDataTable').on('click', function(){
+
+		requirejs(['ff/datatable'], function(){
+		
+			$('#ff_DataTable').DataTable($.extend({}, OPT_DATATABLE, {
+				
+				/*
+				Request: 
+					{
+						draw: 1,
+						start: 0,
+						length: 10						
+					}
+					
+				Response: 
+					{
+						"draw": 1,
+						"recordsTotal": 57,
+						"recordsFiltered": 57,
+						"data": [
+						{
+						  "name": "Tiger Nixon",
+						  "position": "System Architect",
+						  "salary": "$320,800",
+						  "start_date": "2011/04/25",
+						  "office": "Edinburgh",
+						  "extn": "5421"
+						},
+						{
+						  "name": "Garrett Winters",
+						  "position": "Accountant",
+						  "salary": "$170,750",
+						  "start_date": "2011/07/25",
+						  "office": "Tokyo",
+						  "extn": "8422"
+						}						
+					}
+				*/
+				
+				"ajax": "lib/datatable/js/ajax_data.json",
+				"columns": [
+					{ "data": "name" },
+					{ "data": "position" },
+					{ "data": "office" },
+					{ "data": "extn" },
+					{ "data": "start_date" },
+					{ "data": "salary" }
+				]
+			}));				
+		});			
+	});
+
+});</script>
+
+<div class="wrapper-btn">
+	<button id="btn_ffDataTable"  class="btn btn-warning pull-left btn-init" type="button">Init <b>.DataTable()</b></button>
+</div>
+<div class="wrapper-ref">
+	Ref: <a href="https://www.datatables.net/examples/" target="_blank">https://www.datatables.net/examples/</a>
+	<br />
+	<a href="https://datatables.net/reference/api/ajax.url%28%29.load%28%29" target="_blank">通过 AJAX 载入新数据</a>	
+</div>
+
+</div>
+
+
+
+<div class="wrapper-component">
+<a name="ffiCheck"></a>
+<h3>.iCheck()</h3>
+<div class="wrapper-html">
+
+<!-- iCheck HTML -->
+
+<div id="ff_iCheck">
+	<label><input type="checkbox"> Checkbox 1</label><br />
+	<label><input type="checkbox" checked> Checkbox 2</label><br />
+	<label><input type="radio" name="iCheck"> Radio 1</label><br />
+	<label><input type="radio" name="iCheck" checked> Radio 2</label>
+</div>
+
+<!-- END: iCheck HTML -->
+
+</div>
+
+<script>$(document).ready(function(){
+
+	$('#btn_ffiCheck').on('click', function(){
+
+		requirejs(['ff/icheck'], function(){
+		
+			$('#ff_iCheck').find('input').iCheck( $.extend({}, OPT_ICHECK, {
+				
+				// If any params are different from the global ones
+				// overwrite the default one with yours here
+			}));
+			
+			/*
+			
+			// change input's state to 'checked'
+			$('input').iCheck('check');
+
+			// remove 'checked' state
+			$('input').iCheck('uncheck');
+
+			// toggle 'checked' state
+			$('input').iCheck('toggle');
+
+			// change input's state to 'disabled'
+			$('input').iCheck('disable');
+
+			// remove 'disabled' state
+			$('input').iCheck('enable');
+
+			// change input's state to 'indeterminate'
+			$('input').iCheck('indeterminate');
+
+			// remove 'indeterminate' state
+			$('input').iCheck('determinate');
+
+			// apply input changes, which were done outside the plugin
+			$('input').iCheck('update');
+
+			// remove all traces of iCheck
+			$('input').iCheck('destroy');
+			
+			*/
+		});			
+	});
+
+});</script>
+
+<div class="wrapper-btn">
+	<button id="btn_ffiCheck"  class="btn btn-warning pull-left btn-init" type="button">Init <b>.iCheck()</b></button>
+</div>
+<div class="wrapper-ref">
+	Ref: <a href="https://github.com/fronteed/icheck" target="_blank">https://github.com/fronteed/icheck</a>
+</div>
+
+</div>
+
+
+
+<div class="wrapper-component">
+	<a name="ffJQueryValidation"></a>
+	<h3>.validate()</h3>
+	<div class="wrapper-html">
+
+<!-- jQuery Validation HTML -->
+
+<form id="jqValidation_form" method="post" action="javascript:void(0)">
+
+	<input  type="hidden" name="id" value="" />
+	
+	<div id="error_con" class="tips-form">
+		<ul></ul>
+	</div>	
+	
+	<div class="form-td">
+		<label><i>*</i> 用户名：</label>
+		<div class="div-form">
+			<input id="name" name="name" value="" class="form-control input-sm txt_mid" type="text" data-rule-required="true" data-rule-rangelength="[5,32]" data-msg-required="用户名不能为空" data-msg-rangelength="用户名长度必须介于 5 和 32之间的字符串">
+		</div>
+	</div>
+	
+	<div class="form-td" style="margin-top:20px;">
+		<label><i>*</i> 年龄：</label>
+		<div class="div-form">
+			<input id="age" name="age" value="" class="form-control input-sm txt_mid" type="text" data-rule-required="true" data-rule-range="[0,100]" data-msg-required="年龄不能为空" data-msg-range="年龄必须介于 0 和 100 之间">
+		</div>
+	</div>
+
+	<div class="form-td" style="margin-top:20px;">
+		<label>邮箱：</label>
+		<div class="div-form">
+			<input id="email" name="email" value="" class="form-control input-sm txt_mid" type="text" data-rule-email="true" data-msg-email="必须输入正确格式的电子邮件">
+		</div>
+	</div>
+	
+	<div class="form-td" style="margin-top:20px;">
+		<label>备注：</label>
+		<div class="div-form">
+			<input id="remarks" name="remarks" value="" class="form-control input-sm txt_mid" type="text">
+		</div>
+	</div>
+	
+	<div class="form-tr" style="margin-top:20px;">
+		<div class="form-group btn-div">
+			<button type="submit" class="btn btn-primary" >保存</button>
+			<input type="reset" class="btn btn-default" value="重置" >
+		</div>
+	</div>
+
+</form>
+
+<!-- END: jQuery Validation HTML -->
+
+	</div>
+
+<script>$(document).ready(function(){
+
+	$('#btn_ffVlidation').on('click', function(e){
+		e.preventDefault();
+
+		requirejs(['ff/validate'], function() {
+			
+			// Native
+			// $('#formId').validate();
+			
+			// Custom
+			executeValidateFrom('jqValidation_form');
+		});
+	});
+
+});</script>
+
+	<div class="wrapper-btn">
+		<button id="btn_ffVlidation"  class="btn btn-warning pull-left btn-init" type="button">Init <b>.validate()</b></button>
+	</div>
+	<div class="wrapper-ref">
+		Ref: <a href="https://jqueryvalidation.org/" target="_blank">https://jqueryvalidation.org/</a>
+	</div>
+
+</div>
+
+
+
+
+<div class="wrapper-component">
+<a name="ffSelect2"></a>
+<h3>.select2()</h3>
+<div class="wrapper-html">
+
+<!-- Select2 HTML -->
+
+<select id="ff_Select2_single" class="form-control" style="width:300px;" >
+  <optgroup label="Alaskan/Hawaiian Time Zone">
+    <option value="AK">Alaska</option>
+    <option value="HI">Hawaii</option>
+  </optgroup>
+  <optgroup label="Pacific Time Zone">
+    <option value="CA">California</option>
+    <option value="NV">Nevada</option>
+    <option value="OR">Oregon</option>
+    <option value="WA">Washington</option>
+  </optgroup>
+  <optgroup label="Mountain Time Zone">
+    <option value="AZ">Arizona</option>
+    <option value="CO">Colorado</option>
+    <option value="ID">Idaho</option>
+    <option value="MT">Montana</option>
+    <option value="NE">Nebraska</option>
+    <option value="NM">New Mexico</option>
+    <option value="ND">North Dakota</option>
+    <option value="UT">Utah</option>
+    <option value="WY">Wyoming</option>
+  </optgroup>
+</select>
+
+<div class="clearfix" style="margin-top:20px;"></div>
+
+<select id="ff_Select2_multiple" class="form-control" style="width:300px;" multiple >  
+  <optgroup label="Central Time Zone">
+    <option value="AL">Alabama</option>
+    <option value="AR">Arkansas</option>
+    <option value="IL">Illinois</option>
+    <option value="IA">Iowa</option>
+    <option value="KS">Kansas</option>
+    <option value="KY">Kentucky</option>
+    <option value="LA">Louisiana</option>
+    <option value="MN">Minnesota</option>
+    <option value="MS">Mississippi</option>
+    <option value="MO">Missouri</option>
+    <option value="OK">Oklahoma</option>
+    <option value="SD">South Dakota</option>
+    <option value="TX">Texas</option>
+    <option value="TN">Tennessee</option>
+    <option value="WI">Wisconsin</option>
+  </optgroup>
+  <optgroup label="Eastern Time Zone">
+    <option value="CT">Connecticut</option>
+    <option value="DE">Delaware</option>
+    <option value="FL">Florida</option>
+    <option value="GA">Georgia</option>
+    <option value="IN">Indiana</option>
+    <option value="ME">Maine</option>
+    <option value="MD">Maryland</option>
+    <option value="MA">Massachusetts</option>
+    <option value="MI">Michigan</option>
+    <option value="NH">New Hampshire</option>
+    <option value="NJ">New Jersey</option>
+    <option value="NY">New York</option>
+    <option value="NC">North Carolina</option>
+    <option value="OH">Ohio</option>
+    <option value="PA">Pennsylvania</option>
+    <option value="RI">Rhode Island</option>
+    <option value="SC">South Carolina</option>
+    <option value="VT">Vermont</option>
+    <option value="VA">Virginia</option>
+    <option value="WV">West Virginia</option>
+  </optgroup>
+</select>
+
+<!-- END: Select2 HTML -->
+
+</div>
+
+<script>$(document).ready(function(){
+	
+	$('#btn_ffSelect2').on('click', function(){
+	
+		requirejs(['ff/select2'], function() {
+			$('#ff_Select2_single').select2();
+			
+			$('#ff_Select2_multiple').select2({
+				closeOnSelect: false,
+				placeholder: 'Select at least 3 options', // Error messages are in Chinese by default :)
+				maximumSelectionLength: 3
+			});
+		});
+		
+	});	
+	
+});</script>
+
+	<div class="wrapper-btn">
+		<button id="btn_ffSelect2" class="btn btn-warning pull-left btn-init" type="button">Init <b>.select2()</b></button>
+	</div>
+	<div class="wrapper-ref">
+	Ref: <a href="https://select2.github.io/options.html" target="_blank">https://select2.github.io/options.html</a>
+	</div>
+
+</div>
+
+
+
+
+<div class="wrapper-component">
+<a name="ffTreetable"></a>
+<h3>.treeTable()</h3>
+<div class="wrapper-html">
+
+<!-- treeTable HTML -->
+
+<table id="ff_treeTable" class="table table-bordered table-hover">
+	<tr>
+		<td style="width: 200px;">标题</td>
+		<td>内容</td>
+	</tr>
+	
+	<tr id="7" pid="3">
+		<td>3.1</td>
+		<td>内容</td>
+	</tr>	
+	
+	<tr id="8" pid="6">
+		<td>5.1</td>
+		<td>内容</td>
+	</tr>
+	
+	<tr id="5" pid="4">
+		<td>4.1</td>
+		<td>内容</td>
+	</tr>
+	
+	<tr id="1">
+		<td><span controller="true">1</span></td>
+		<td>内容</td>
+	</tr>
+	
+	<tr id="2" pid="1">
+		<td><span controller="true">2</span></td>
+		<td>内容</td>
+	</tr>
+	
+	<tr id="3" pid="2">
+		<td>3</td>
+		<td>内容</td>
+	</tr>
+	
+	<tr id="4" pid="2">
+		<td>4</td>
+		<td>内容</td>
+	</tr>
+	
+	<tr id="6">
+		<td>5</td>
+		<td>内容</td>
+	</tr>
+	
+	<tr id="9" pid="1">
+		<td>1.1</td>
+		<td>内容</td>
+	</tr>
+</table>
+
+<!-- END: treeTable HTML -->
+
+</div>
+
+<script>$(document).ready(function(){
+	
+	$('#btn_ffTreetable').on('click', function(){
+	
+		requirejs(['ff/treetable'], function(){
+			$('#ff_treeTable').treeTable({
+				//theme : 'vsStyle',  
+				//expandLevel : 6
+			});
+		});
+		
+	});	
+	
+});</script>
+
+	<div class="wrapper-btn">
+		<button id="btn_ffTreetable" class="btn btn-warning pull-left btn-init" type="button">Init <b>.treeTable()</b></button>
+	</div>
+	<div class="wrapper-ref">
+	Ref: <a href="http://www.cnblogs.com/hongyuniu/archive/2012/07/04/2575929.html" target="_blank">http://www.cnblogs.com/hongyuniu/archive/2012/07/04/2575929.html</a>
+	</div>
+
+</div>
+	
+
+
+
+<div class="wrapper-component">
+	<a name="ffUEditor"></a>
+	<h3>.UEditor()</h3>
+	<div><script id="ff_UEditor" type="text/plain"></script></div>
+	<div class="wrapper-html" >
+
+<!-- UEditor HTML -->
+
+<script id="ff_UEditor" type="text/plain"></script>
+
+<!-- END: UEditor HTML -->
+
+	</div>
+
+<script>$(document).ready(function(){
+
+	$('#btn_ffUEditor').on('click', function(){
+
+		requirejs(['ff/ueditor'], function(){
+		
+			var contentEditor = UE.getEditor('ff_UEditor', {
+				initialFrameWidth : 700,
+				initialFrameHeight : 360,
+				wordCount : true,
+				maximumWords : 300
+			});
+
+		});
+
+	});
+
+});</script>
+
+	<div class="wrapper-btn">
+			<button id="btn_ffUEditor"  class="btn btn-warning pull-left btn-init" type="button">Init <b>.UEditor()</b></button>
+	</div>
+	<div class="wrapper-ref">
+		Ref: <a href="http://ueditor.baidu.com/website/" target="_blank">http://ueditor.baidu.com/website/</a>
+	</div>
+
+</div>
+
+
+
+
+<div class="wrapper-component">
+<a name="ffWebUploader"></a>
+<h3>WebUploader</h3>
+<div class="wrapper-html">
+
+<!-- WebUploader HTML -->
+
+<div class="webuploader">
+    <div id="ff_WebUploader_imgList" class="uploader-list"></div>
+    <div id="ff_WebUploader_imgPicker">选择图片</div>
+</div>
+
+<div class="webuploader">
+	<div id="ff_WebUploader_fileList" class="uploader-list"></div>
+	<div id="ff_WebUploader_filePicker">选择文件</div>
+</div>
+
+<!-- END: WebUploader HTML -->
+
+</div>
+
+<script>$(document).ready(function(){
+
+	var webuploader_callback = {
+				
+		// When single file selected
+		fileQueued: function(file){ },
+		
+		// When multiple files selected
+		filesQueued: function(files){ },
+		
+		// When single file deleted
+		fileDeleted: function(file){ },
+		
+		// Uploading
+		uploadProgress: function(file, percentage){ },
+		
+		// 'response' is returned from server
+		uploadSuccess: function(file, response){ },
+		
+		// Detailed error messages are printed in console
+		uploadError: function(file){ },
+		
+		// Single file finished no matter it is uploaded successfully or not
+		uploadComplete: function(file){ },
+		
+		// All finished
+		uploadFinished: function(){ }
+	};
+				
+	$('#btn_ffWebUploader').on('click', function(){
+
+		requirejs(['ff/webuploader'], function(webuploader){
+			
+			// init image uploader
+			webuploader({
+				
+				type: 'image', // type: image, file
+				list: '#ff_WebUploader_imgList',
+				pick: '#ff_WebUploader_imgPicker',
+				server: '/', // Backend script receiving the file(s)
+				accept: {					
+					extensions: 'gif,jpg,jpeg,bmp,png' // 英文逗号前后不要有空格！
+					//mimeTypes: 'image/*' // If only images are allowed strictly
+				},
+				callback: webuploader_callback
+			});
+			
+			// init file uploader
+			webuploader({
+				
+				type: 'file', // type: image, file
+				list: '#ff_WebUploader_fileList',
+				pick: '#ff_WebUploader_filePicker',
+				server: '/', // Backend script receiving the file(s)
+				accept: {					
+					//extensions: 'doc,docx,ppt,pptx' // 英文逗号前后不要有空格！
+				},
+				callback: webuploader_callback
+			});
+			
+			// webuploader.instance.removeFile(file.id)
+			
+		});
+		
+	});
+
+});</script>
+
+<div class="wrapper-btn">
+	<button id="btn_ffWebUploader"  class="btn btn-warning pull-left btn-init" type="button">Init <b>WebUploader</b></button>
+</div>
+<div class="wrapper-ref">
+	Ref: <a href="http://fex.baidu.com/webuploader/" target="_blank">http://fex.baidu.com/webuploader/</a>
+</div>
+
+</div>
+
+
+
+
+<div class="wrapper-component">
+<a name="ffZtree"></a>
+<h3>.zTree()</h3>
+<div class="wrapper-html">
+
+<!-- zTree HTML -->
+
+<ul id="ff_zTree" class="ztree"></ul>
+
+<!-- END: zTree HTML -->
+
+</div>
+
+<script>$(document).ready(function(){
+
+	$('#btn_ffZtree').on('click', function(){
+
+		requirejs(['ff/ztree'], function(){
+
+			$.ajax({
+				url: "lib/ztree/ztreeData.json",
+				dataType: "json",
+				success: function(data) {
+					zTreeInit(data);
+				}
+			});			
+
+			function zTreeInit(zData) {
+				var tree_setting = {
+					data: {
+						simpleData: {
+							enable: true
+						},
+						key: {
+							url: ""
+						}
+					},
+					view:{
+						selectedMulti: false
+					},
+					callback: {
+						//beforeClick: beforeClick
+					}
+				};
+				
+				$.fn.zTree.init($("#ff_zTree"), tree_setting, zData);
+			}
+		});
+		
+	});
+
+});</script>
+
+<div class="wrapper-btn">
+	<button id="btn_ffZtree"  class="btn btn-warning pull-left btn-init" type="button">Init <b>.zTree()</b></button>
+</div>
+<div class="wrapper-ref">
+	Ref: <a href="https://github.com/zTree/zTree_v3" target="_blank">https://github.com/zTree/zTree_v3</a>
+</div>
+
+</div>
+
+
+	
+	
+	
+<h2>Bootstrap Components</h2>
+
+
+
+
+<div class="wrapper-component">
+	<a name="bsAffix"></a>
+	<h3>.bsAffix()</h3>	
+	
+	<div class="wrapper-html">
+	
+<!-- bsAffix HTML -->
+
+<div class="well pull-left bs-affix" data-spy="affix">Look, I will be fixed on top soon :)</div>
+
+<!-- END: bsAffix HTML -->
+
+	</div>
+
+<script>$(document).ready(function(){
+			
+	$('#btn_bsAffix').on('click', function(e){
+		e.preventDefault();
+		
+		requirejs(['bs/affix'], function(){
+			$('.bs-affix').bsAffix({
+				offset: {top: 0}
+			});
+		});			
+	});
+	
+});</script>
+
+	<div class="wrapper-btn">
+		<button id="btn_bsAffix" class="btn btn-warning pull-left btn-init" type="button">Init <b>.bsAffix()</b></button>
+	</div>
+	<div class="wrapper-ref">
+	Ref: <a href="http://v3.bootcss.com/javascript/#affix" target="_blank">http://v3.bootcss.com/javascript/#affix</a>
+	</div>
+	
+</div>
+
+
+
+
+<div class="wrapper-component">
+	<a name="bsAlert"></a>
+	<h3>.bsAlert()</h3>	
+	
+	<div class="wrapper-html">
+	
+<!-- bsAlert HTML -->
+
+<div role="alert" class="alert alert-warning alert-dismissible fade in bs-alert">
+	<button aria-label="Close" data-dismiss="alert" class="close" type="button">
+		<span aria-hidden="true">×</span>
+	</button>
+	<strong>Holy guacamole!</strong> Best check yo self, you're not looking too good. 
+</div>
+
+<div role="alert" class="alert alert-danger alert-dismissible fade in bs-alert">
+	<button aria-label="Close" data-dismiss="alert" class="close" type="button">
+		<span aria-hidden="true">×</span>
+	</button>
+	<h4>Oh snap! You got an error!</h4> 
+	<p>Change this and that and try again. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.</p>
+</div>
+
+<!-- END: bsAlert HTML -->
+
+	</div>
+
+<script>$(document).ready(function(){
+			
+	$('#btn_bsAlert').on('click', function(e){
+		e.preventDefault();
+		
+		requirejs(['bs/alert'], function(){
+			$('.bs-alert').bsAlert();
+		});			
+	});
+	
+});</script>
+
+	<div class="wrapper-btn">
+		<button id="btn_bsAlert" class="btn btn-warning pull-left btn-init" type="button">Init <b>.bsAlert()</b></button>
+	</div>
+	<div class="wrapper-ref">
+	Ref: <a href="http://v3.bootcss.com/javascript/#alert" target="_blank">http://v3.bootcss.com/javascript/#alert</a>
+	</div>
+	
+</div>
+
+
+
+
+<div class="wrapper-component">
+	<a name="bsButton"></a>
+	<h3>.bsButton()</h3>	
+	
+	<div class="wrapper-html">
+	
+<!-- bsButton HTML -->
+
+<button type="button" id="bsButton_loading" data-loading-text="Loading..." class="btn btn-info" autocomplete="off">
+  Submit
+</button>
+
+<div class="btn-group" data-toggle="buttons">
+	<label class="btn btn-default active">
+		<input type="checkbox" autocomplete="off" checked> Checkbox 1
+	</label>
+	<label class="btn btn-default">
+		<input type="checkbox" autocomplete="off"> Checkbox 2
+	</label>
+	<label class="btn btn-default">
+		<input type="checkbox" autocomplete="off"> Checkbox 3
+	</label>
+</div>
+
+<div class="btn-group" data-toggle="buttons">
+	<label class="btn btn-default active">
+		<input type="radio" name="options" id="option1" autocomplete="off" checked> Radio 1 
+	</label>
+	<label class="btn btn-default">
+		<input type="radio" name="options" id="option2" autocomplete="off"> Radio 2
+	</label>
+	<label class="btn btn-default">
+		<input type="radio" name="options" id="option3" autocomplete="off"> Radio 3
+	</label>
+</div>
+
+<!-- END: bsButton HTML -->
+
+	</div>
+
+<script>$(document).ready(function(){
+			
+	$('#btn_bsButton').on('click', function(e){
+		e.preventDefault();
+		
+		requirejs(['bs/button'], function(){
+			$('#bsButton_loading').on('click', function () {
+				var $btn = $(this).bsButton('loading');	
+				// business logic...
+				setTimeout(function(){ $btn.bsButton('reset'); }, 1500);
+			});
+			
+			$('.btn-group').bsButton();
+		});	
+	});
+	
+});</script>
+
+	<div class="wrapper-btn">
+		<button id="btn_bsButton" class="btn btn-warning pull-left btn-init" type="button">Init <b>.bsButton()</b></button>
+	</div>
+	<div class="wrapper-ref">
+	Ref: <a href="http://v3.bootcss.com/javascript/#buttons" target="_blank">http://v3.bootcss.com/javascript/#buttons</a>
+	</div>
+	
+</div>
+
+
+
+
+<div class="wrapper-component">
+	<a name="bsCarousel"></a>
+	<h3>.bsCarousel()</h3>	
+	
+	<div class="wrapper-html">
+	
+<!-- bsCarousel HTML -->
+
+<div data-ride="carousel" class="carousel slide" id="bs_Carousel">
+    <ol class="carousel-indicators">
+        <li class="" data-slide-to="0" data-target="#bs_Carousel"></li>
+        <li data-slide-to="1" data-target="#bs_Carousel" class=""></li>
+        <li data-slide-to="2" data-target="#bs_Carousel" class="active"></li>
+    </ol>
+    <div role="listbox" class="carousel-inner">
+        <div class="item">
+          <img alt="900x500" data-src="holder.js/900x500/auto/#777:#777" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDkwMCA1MDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzkwMHg1MDAvYXV0by8jNzc3OiM3NzcKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTQ5ZGZhMGQ3MSB0ZXh0IHsgZmlsbDojNzc3O2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjQ1cHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1NDlkZmEwZDcxIj48cmVjdCB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iIzc3NyIvPjxnPjx0ZXh0IHg9IjMzMy4yMTY2NjcxNzUyOTI5NyIgeT0iMjcwLjQiPjkwMHg1MDA8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" data-holder-rendered="true">
+          <div class="carousel-caption">
+            <h3>First slide</h3>
+            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          </div>
+        </div>
+        <div class="item">
+          <img alt="900x500" data-src="holder.js/900x500/auto/#666:#666" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDkwMCA1MDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzkwMHg1MDAvYXV0by8jNjY2OiM2NjYKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTQ5ZGZhNDMzYiB0ZXh0IHsgZmlsbDojNjY2O2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjQ1cHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1NDlkZmE0MzNiIj48cmVjdCB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iIzY2NiIvPjxnPjx0ZXh0IHg9IjMzMy4yMTY2NjcxNzUyOTI5NyIgeT0iMjcwLjQiPjkwMHg1MDA8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" data-holder-rendered="true">
+          <div class="carousel-caption">
+            <h3>Second slide</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+        </div>
+        <div class="item active">
+          <img alt="900x500" data-src="holder.js/900x500/auto/#555:#555" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDkwMCA1MDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzkwMHg1MDAvYXV0by8jNTU1OiM1NTUKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTQ5ZGZhNGEzNyB0ZXh0IHsgZmlsbDojNTU1O2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjQ1cHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1NDlkZmE0YTM3Ij48cmVjdCB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iIzU1NSIvPjxnPjx0ZXh0IHg9IjMzMy4yMTY2NjcxNzUyOTI5NyIgeT0iMjcwLjQiPjkwMHg1MDA8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" data-holder-rendered="true">
+          <div class="carousel-caption">
+            <h3>Third slide</h3>
+            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+          </div>
+        </div>
+    </div>
+    <a data-slide="prev" role="button" href="#bs_Carousel" class="left carousel-control">
+        <span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a data-slide="next" role="button" href="#bs_Carousel" class="right carousel-control">
+        <span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+<style>.carousel-inner > .item > img{width:100%;height:500px;}</style>
+
+<!-- END: bsCarousel HTML -->
+
+	</div>
+
+<script>$(document).ready(function(){
+			
+	$('#btn_bsCarousel').on('click', function(e){
+		e.preventDefault();
+		
+		requirejs(['bs/carousel'], function(){
+			$('#bs_Carousel').bsCarousel();
+		});			
+	});
+	
+});</script>
+
+	<div class="wrapper-btn">
+		<button id="btn_bsCarousel" class="btn btn-warning pull-left btn-init" type="button">Init <b>.bsCarousel()</b></button>
+	</div>
+	<div class="wrapper-ref">
+	Ref: <a href="http://v3.bootcss.com/javascript/#carousel" target="_blank">http://v3.bootcss.com/javascript/#carousel</a>
+	</div>
+	
+</div>
+
+
+
+
+<div class="wrapper-component">
+	<a name="bsCollapse"></a>
+	<h3>.bsCollapse()</h3>	
+	
+	<div class="wrapper-html">
+	
+<!-- bsCollapse HTML -->
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+	<div class="panel-heading" role="tab" id="headingOne">
+	  <h4 class="panel-title">
+		<a role="button" data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+		  Collapsible Group Item #1
+		</a>
+	  </h4>
+	</div>
+	<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+	  <div class="panel-body">
+		Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+	  </div>
+	</div>
+  </div>
+  <div class="panel panel-default">
+	<div class="panel-heading" role="tab" id="headingTwo">
+	  <h4 class="panel-title">
+		<a class="collapsed" role="button" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+		  Collapsible Group Item #2
+		</a>
+	  </h4>
+	</div>
+	<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+	  <div class="panel-body">
+		Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+	  </div>
+	</div>
+  </div>
+  <div class="panel panel-default">
+	<div class="panel-heading" role="tab" id="headingThree">
+	  <h4 class="panel-title">
+		<a class="collapsed" role="button" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+		  Collapsible Group Item #3
+		</a>
+	  </h4>
+	</div>
+	<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+	  <div class="panel-body">
+		Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+	  </div>
+	</div>
+  </div>
+</div>
+
+<!-- END: bsCollapse HTML -->
+
+	</div>
+
+<script>$(document).ready(function(){
+			
+	$('#btn_bsCollapse').on('click', function(e){
+		e.preventDefault();
+		
+		requirejs(['bs/collapse'], function(){
+			$('.collapse').bsCollapse({
+				'parent': '#accordion',
+				 toggle: false
+			});
+		});			
+	});
+	
+});</script>
+
+	<div class="wrapper-btn">
+		<button id="btn_bsCollapse" class="btn btn-warning pull-left btn-init" type="button">Init <b>.bsCollapse()</b></button>
+	</div>
+	<div class="wrapper-ref">
+	Ref: <a href="http://v3.bootcss.com/javascript/#collapse-example-accordion" target="_blank">http://v3.bootcss.com/javascript/#collapse-example-accordion</a>
+	</div>
+	
+</div>
+
+
+
+
+<div class="wrapper-component">
+	<a name="bsDropdown"></a>
+	<h3>.bsDropdown()</h3>	
+	
+	<div class="wrapper-html">
+	
+<!-- bsDropdown HTML -->
+
+<div class="dropdown pull-left">
+  <button class="btn btn-info dropdown-toggle" type="button" id="bs_DropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Dropdown
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="bs_DropdownMenu1">
+    <li><a href="#">Action</a></li>
+    <li><a href="#">Another action</a></li>
+    <li><a href="#">Something else here</a></li>
+	<li role="separator" class="divider"></li>
+    <li><a href="#">Separated link</a></li>
+  </ul>
+</div>
+
+<div class="dropup pull-left" style="margin-left:1em;">
+  <button class="btn btn-info dropdown-toggle" type="button" id="bs_DropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Dropup
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="bs_DropdownMenu2">
+    <li><a href="#">Action</a></li>
+    <li><a href="#">Another action</a></li>
+    <li><a href="#">Something else here</a></li>
+	<li role="separator" class="divider"></li>
+    <li><a href="#">Separated link</a></li>
+  </ul>
+</div>
+
+<!-- END: bsDropdown HTML -->
+
+	</div>
+
+<script>$(document).ready(function(){
+			
+	$('#btn_bsDropdown').on('click', function(e){
+		e.preventDefault();
+		
+		requirejs(['bs/dropdown'], function(){
+			// It seems we need to trigger .bsDropdown(), but no need at all :)
+		});	
+	});
+	
+});</script>
+
+	<div class="wrapper-btn">
+		<button id="btn_bsDropdown" class="btn btn-warning pull-left btn-init" type="button">Init <b>.bsDropdown()</b></button>
+	</div>
+	<div class="wrapper-ref">
+	Ref: <a href="http://v3.bootcss.com/components/#dropdowns" target="_blank">http://v3.bootcss.com/components/#dropdowns</a>
+	</div>
+	
+</div>
+
+
+
+
+<div class="wrapper-component">
+	<a name="bsModal"></a>
+	<h3>.bsModal()</h3>	
+	
+	<div class="wrapper-html">
+	
+<!-- bsModal HTML -->
+
+<button type="button" class="btn btn-info" data-toggle="modal" data-target="#bs_Modal">
+  Open modal
+</button>
+
+<div class="modal fade" id="bs_Modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <p>One fine body&hellip;</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- END: bsModal HTML -->
+
+	</div>
+
+<script>$(document).ready(function(){
+			
+	$('#btn_bsModal').on('click', function(e){
+		e.preventDefault();
+		
+		requirejs(['bs/modal'], function(){
+			$('#bs_Modal').bsModal({
+				show: false
+			});
+		});			
+	});
+	
+});</script>
+
+	<div class="wrapper-btn">
+		<button id="btn_bsModal" class="btn btn-warning pull-left btn-init" type="button">Init <b>.bsModal()</b></button>
+	</div>
+	<div class="wrapper-ref">
+	Ref: <a href="http://v3.bootcss.com/javascript/#modals" target="_blank">http://v3.bootcss.com/javascript/#modals</a>
+	</div>
+	
+</div>
+
+
+
+
+<div class="wrapper-component">
+	<a name="bsPopover"></a>
+	<h3>.bsPopover()</h3>	
+	
+	<div class="wrapper-html">
+	
+<!-- bsPopover HTML -->
+
+<a id="bs_Popover" tabindex="0" class="btn btn-info" role="button" data-toggle="popover" data-trigger="hover" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">Popover on mouse over</a>
+
+<!-- END: bsPopover HTML -->
+
+	</div>
+
+<script>$(document).ready(function(){
+			
+	$('#btn_bsPopover').on('click', function(e){
+		e.preventDefault();
+		
+		requirejs(['bs/popover'], function(){
+			$('#bs_Popover').bsPopover();
+		});			
+	});
+	
+});</script>
+
+	<div class="wrapper-btn">
+		<button id="btn_bsPopover" class="btn btn-warning pull-left btn-init" type="button">Init <b>.bsPopover()</b></button>
+	</div>
+	<div class="wrapper-ref">
+	Ref: <a href="http://v3.bootcss.com/javascript/#popovers" target="_blank">http://v3.bootcss.com/javascript/#popovers</a>
+	</div>
+	
+</div>
+
+
+
+
+
+<div class="wrapper-component">
+<a name="bsTab"></a>
+<h3>.bsTab()</h3>	
+<div class="wrapper-html">
+
+<!-- bsTab HTML -->
+
+<ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
+    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
+    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="home">
+		Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.
+	</div>
+    <div role="tabpanel" class="tab-pane" id="profile">
+		Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.
+	</div>
+    <div role="tabpanel" class="tab-pane" id="messages">
+		Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.
+	</div>
+    <div role="tabpanel" class="tab-pane" id="settings">
+		Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater. Lomo wolf viral, mustache readymade thundercats keffiyeh craft beer marfa ethical. Wolf salvia freegan, sartorial keffiyeh echo park vegan.
+	</div>
+</div>
+
+<!-- END: bsTab HTML -->
+
+</div>
+
+<script>$(document).ready(function(){
+			
+	$('#btn_bsTab').on('click', function(e){
+		e.preventDefault();
+		
+		requirejs(['bs/tab'], function(){
+			$('.nav-tabs').bsTab();
+		});			
+	});	
+	
+});</script>
+
+	<div class="wrapper-btn">
+		<button id="btn_bsTab" class="btn btn-warning pull-left btn-init" type="button">Init <b>.bsTab()</b></button>
+	</div>
+	<div class="wrapper-ref">
+	Ref: <a href="http://v3.bootcss.com/javascript/#tabs" target="_blank">http://v3.bootcss.com/javascript/#tabs</a>
+	</div>
+
+</div>
+
+
+
+
+
+<div class="wrapper-component">
+	<a name="bsTooltip"></a>
+	<h3>.bsTooltip()</h3>	
+	
+	<div class="wrapper-html">
+	
+<!-- bsTooltip HTML -->
+
+<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Tooltip on left">Tooltip on left</button>
+<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Tooltip on top</button>
+<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">Tooltip on bottom</button>
+<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Tooltip on right">Tooltip on right</button>
+
+<!-- END: bsTooltip HTML -->
+
+	</div>
+
+<script>$(document).ready(function(){
+			
+	$('#btn_bsTooltip').on('click', function(e){
+		e.preventDefault();
+		
+		requirejs(['bs/tooltip'], function(){
+			$('[data-toggle="tooltip"]').bsTooltip();
+		});			
+	});
+	
+});</script>
+
+	<div class="wrapper-btn">
+		<button id="btn_bsTooltip" class="btn btn-warning pull-left btn-init" type="button">Init <b>.bsTooltip()</b></button>
+	</div>
+	<div class="wrapper-ref">
+	Ref: <a href="http://v3.bootcss.com/javascript/#tooltips" target="_blank">http://v3.bootcss.com/javascript/#tooltips</a>
+	</div>
+	
+</div>
+
+
+
+
+
+<h2>jQuery UI Components</h2>
+
+<div class="wrapper-component">
+<a name="jqAccordion"></a>
+<h3>.accordion()</h3>	
+<div class="wrapper-html">
+
+<!-- Accordion HTML -->
+
+<div id="jq_Accordion">
+  <h3>Section 1</h3>
+  <div>
+    <p>
+    Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+    ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+    amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+    odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+    </p>
+  </div>
+  <h3>Section 2</h3>
+  <div>
+    <p>
+    Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+    purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+    velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+    suscipit faucibus urna.
+    </p>
+  </div>
+  <h3>Section 3</h3>
+  <div>
+    <p>
+    Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
+    Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
+    ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
+    lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
+    </p>
+    <ul>
+      <li>List item one</li>
+      <li>List item two</li>
+      <li>List item three</li>
+    </ul>
+  </div>
+  <h3>Section 4</h3>
+  <div>
+    <p>
+    Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+    et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
+    faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
+    mauris vel est.
+    </p>
+    <p>
+    Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
+    Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+    inceptos himenaeos.
+    </p>
+  </div>
+</div>
+
+<!-- END: Accordion HTML -->
+
+</div>
+
+<script>$(document).ready(function(){
+			
+	$('#btn_jqAccordion').on('click', function(e){
+		e.preventDefault();
+		
+		requirejs(['jq/accordion'], function() {
+			$( "#jq_Accordion" ).accordion();
+		});	
+	});	
+	
+});</script>
+
+	<div class="wrapper-btn">
+		<button id="btn_jqAccordion" class="btn btn-warning pull-left btn-init" type="button">Init <b>.accordion()</b></button>
+	</div>
+	<div class="wrapper-ref">
+	Ref: <a href="http://jqueryui.com/accordion/" target="_blank">http://jqueryui.com/accordion/</a>
+	</div>
+
+</div>
+
+
+
+
+<div class="wrapper-component">
+<a name="jqAutocomplete"></a>
+<h3>.autocomplete()</h3>	
+<div class="wrapper-html">
+
+<!-- Autocomplete HTML -->
+
+<form class="form-inline">
+	<input type="text" id="jq_Autocomplete" class="form-control col-xs-4" placeholder="Type: Java" />
+</form>
+
+<!-- END: Autocomplete HTML -->
+
+</div>
+
+<script>$(document).ready(function(){
+			
+	var availableTags = [
+		"ActionScript",
+		"AppleScript",
+		"Asp",
+		"BASIC",
+		"C",
+		"C++",
+		"Clojure",
+		"COBOL",
+		"ColdFusion",
+		"Erlang",
+		"Fortran",
+		"Groovy",
+		"Haskell",
+		"Java",
+		"JavaScript",
+		"Lisp",
+		"Perl",
+		"PHP",
+		"Python",
+		"Ruby",
+		"Scala",
+		"Scheme"
+    ];
+	
+	$('#btn_jqAutocomplete').on('click', function(e){
+		e.preventDefault();
+		
+		requirejs(['jq/autocomplete'], function() {
+			$('#jq_Autocomplete').autocomplete({
+				source: availableTags
+			});
+		});	
+	});	
+	
+});</script>
+
+	<div class="wrapper-btn">
+		<button id="btn_jqAutocomplete" class="btn btn-warning pull-left btn-init" type="button">Init <b>.autocomplete()</b></button>
+	</div>
+	<div class="wrapper-ref">
+	Ref: <a href="http://jqueryui.com/autocomplete/" target="_blank">http://jqueryui.com/autocomplete/</a>
+	</div>
+
+</div>
+
+
+
+<div class="wrapper-component">
+<a name="jqButton"></a>
+<h3>.button() / .buttonset()</h3>	
+<div class="wrapper-html">
+
+<!-- Button HTML -->
+ 
+<input type="checkbox" id="checkbox_single"><label for="checkbox_single">Toggle</label>
+ 
+<div class="button_set">
+	<input type="checkbox" id="check1"><label for="check1">Checkbox A</label>
+	<input type="checkbox" id="check2"><label for="check2">Checkbox B</label>
+	<input type="checkbox" id="check3"><label for="check3">Checkbox C</label>
+</div>
+
+<div class="button_set">
+    <input type="radio" id="radio1" name="radio"><label for="radio1">Radio 1</label>
+    <input type="radio" id="radio2" name="radio" checked="checked"><label for="radio2">Radio 2</label>
+    <input type="radio" id="radio3" name="radio"><label for="radio3">Radio 3</label>
+</div>
+
+<!-- END: Button HTML -->
+
+</div>
+
+<script>$(document).ready(function(){
+			
+	$('#btn_jqButton').on('click', function(e){
+		e.preventDefault();
+		
+		requirejs(['jq/button'], function() {
+			$('#checkbox_single').button();
+			$('.button_set').buttonset();
+		});	
+	});	
+	
+});</script>
+
+	<div class="wrapper-btn">
+		<button id="btn_jqButton" class="btn btn-warning pull-left btn-init" type="button">Init <b>.button() / .buttonset()</b></button>
+	</div>
+	<div class="wrapper-ref">
+	Ref: <a href="http://jqueryui.com/button/" target="_blank">http://jqueryui.com/button/</a>
+	</div>
+
+</div>
+
+
+
+<div class="wrapper-component">
+<a name="jqDatepicker"></a>
+<h3>.datepicker()</h3>
+<div class="wrapper-html">
+
+<!-- Datepicker HTML -->
+
+<form class="form-inline">
+	<input type="text" id="jq_Datepicker" class="form-control col-xs-4" />
+</form>
+
+<!-- END: Datepicker HTML -->
+
+</div>
+
+<script>$(document).ready(function(){
+			
+	$('#btn_jqDatepicker').on('click', function(e){
+		e.preventDefault();
+		
+		requirejs(['jq/datepicker'], function() {
+			$('#jq_Datepicker').datepicker( $.extend({}, OPT_DATEPICKER, {
+				// If any params are different from the global ones
+				// overwrite the default dateFormat('yy-mm-dd') with
+				// dateFormat: 'yy/mm/dd'
+			}));
+		});	
+	});	
+	
+});</script>
+
+	<div class="wrapper-btn">
+		<button id="btn_jqDatepicker" class="btn btn-warning pull-left btn-init" type="button">Init <b>.datepicker()</b></button>
+	</div>
+	<div class="wrapper-ref">
+	Ref: <a href="http://jqueryui.com/datepicker/" target="_blank">http://jqueryui.com/datepicker/</a>
+	</div>
+
+</div>
+
+
+
+
+
+<div class="wrapper-component">
+<a name="jqDialog"></a>
+<h3>.dialog()</h3>	
+<div class="wrapper-html">
+
+<!-- Dialog HTML -->
+
+<div id="jq_Dialog" title="Basic dialog">
+  <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+</div>
+
+<button type="button" id="btn_Dialog_open" class="btn btn-info">Open Dialog</button>
+<button type="button" id="btn_Dialog_close" class="btn btn-info">Close Dialog</button>
+
+<!-- END: Dialog HTML -->
+
+</div>
+
+<script>$(document).ready(function(){
+			
+	$('#btn_jqDialog').on('click', function(e){
+		e.preventDefault();
+		
+		requirejs(['jq/dialog'], function() {
+			$('#jq_Dialog').dialog({
+				modal: true,
+				buttons: {
+					Ok: function() {
+						$(this).dialog('close');
+					},
+					'关闭': function() {
+						$(this).dialog('close');
+						alert('Cool! Chinese is allowed.');
+					}
+				}				
+			});
+			
+			$('#btn_Dialog_open').click(function(){
+				$('#jq_Dialog').dialog('open');
+			});
+			
+			$('#btn_Dialog_close').click(function(){
+				$('#jq_Dialog').dialog('close');
+			});
+		});	
+	});	
+	
+});</script>
+
+	<div class="wrapper-btn">
+		<button id="btn_jqDialog" class="btn btn-warning pull-left btn-init" type="button">Init <b>.dialog()</b></button>
+	</div>
+	<div class="wrapper-ref">
+	Ref: <a href="http://jqueryui.com/dialog/" target="_blank">http://jqueryui.com/dialog/</a>
+	</div>
+
+</div>
+
+
+
+<div class="wrapper-component">
+<a name="jqMenu"></a>
+<h3>.menu()</h3>
+<div class="wrapper-html">
+
+<!-- Menu HTML -->
+
+<ul id="jq_Menu" class="pull-left" style="white-space:nowrap;">
+  <li class="ui-state-disabled"><div>Aberdeen</div></li>
+  <li><div>Ada</div></li>
+  <li><div>Adamsville</div></li>
+  <li><div>Addyston</div></li>
+  <li><div>Delphi</div>
+    <ul>
+      <li class="ui-state-disabled"><div>Ada</div></li>
+      <li><div>Saarland</div></li>
+      <li><div>Salzburg an der schönen Donau</div></li>
+    </ul>
+  </li>
+  <li><div>Saarland</div></li>
+  <li><div>Salzburg</div>
+    <ul>
+      <li><div>Delphi</div>
+        <ul>
+          <li><div>Ada</div></li>
+          <li><div>Saarland</div></li>
+          <li><div>Salzburg</div></li>
+        </ul>
+      </li>
+      <li><div>Delphi</div>
+        <ul>
+          <li><div>Ada</div></li>
+          <li><div>Saarland</div></li>
+          <li><div>Salzburg</div></li>
+        </ul>
+      </li>
+      <li><div>Perch</div></li>
+    </ul>
+  </li>
+  <li class="ui-state-disabled"><div>Amesville</div></li>
+</ul>
+
+<!-- END: Menu HTML -->
+
+</div>
+
+<script>$(document).ready(function(){
+			
+	$('#btn_jqMenu').on('click', function(e){
+		e.preventDefault();
+		
+		requirejs(['jq/menu'], function() {
+			$('#jq_Menu').menu();
+		});	
+	});	
+	
+});</script>
+
+	<div class="wrapper-btn">
+		<button id="btn_jqMenu" class="btn btn-warning pull-left btn-init" type="button">Init <b>.menu()</b></button>
+	</div>
+	<div class="wrapper-ref">
+	Ref: <a href="http://jqueryui.com/menu/" target="_blank">http://jqueryui.com/menu/</a>
+	</div>
+
+</div>
+
+
+
+<div class="wrapper-component">
+<a name="jqProgressbar"></a>
+<h3>.progressbar()</h3>
+<div class="wrapper-html jq-progressbar">
+
+<!-- Progressbar HTML -->
+
+<div id="jq_Progressbar"></div>
+<button id="btn_jqProgressbar_num" class="btn btn-info">Random Value - Determinate</button>
+<button id="btn_jqProgressbar_false" class="btn btn-info">Indeterminate</button>
+<button id="btn_jqProgressbar_color" class="btn btn-info">Random Color</button>
+
+<style>
+#jq_Progressbar{margin-bottom:20px;}
+</style>
+
+<!-- END: Progressbar HTML -->
+
+</div>
+
+<script>$(document).ready(function(){
+			
+	$('#btn_jqProgressbar').on('click', function(e){
+		e.preventDefault();		
+		
+		requirejs(['jq/progressbar'], function() {
+			$('#jq_Progressbar').progressbar({
+				value: false
+			});			
+			
+			$('.jq-progressbar').on('click', 'button', function(e){
+				var target = $( e.target );
+				var progressbar = $( "#jq_Progressbar" );
+				var progressbarValue = progressbar.find( ".ui-progressbar-value" );
+		 
+				if ( target.is( "#btn_jqProgressbar_num" ) ) {
+					progressbar.progressbar( "option", {
+						value: Math.floor( Math.random() * 100 )
+					});
+				} else if ( target.is( "#btn_jqProgressbar_color" ) ) {
+					progressbarValue.css({
+						"background": '#' + Math.floor( Math.random() * 16777215 ).toString( 16 )
+					});
+				} else if ( target.is( "#btn_jqProgressbar_false" ) ) {
+					progressbar.progressbar( "option", "value", false );
+				}
+			});
+			
+		});	
+	});	
+	
+});</script>
+
+	<div class="wrapper-btn">
+		<button id="btn_jqProgressbar" class="btn btn-warning pull-left btn-init" type="button">Init <b>.progressbar()</b></button>
+	</div>
+	<div class="wrapper-ref">
+	Ref: <a href="http://jqueryui.com/progressbar/" target="_blank">http://jqueryui.com/progressbar/</a>
+	</div>
+
+</div>
+
+
+
+
+<div class="wrapper-component">
+<a name="jqSelectmenu"></a>
+<h3>.selectmenu()</h3>
+<div class="wrapper-html">
+
+<!-- Selectmenu HTML -->
+
+<select id="jq_Selectmenu">
+  <optgroup label="Scripts">
+	<option value="jquery">jQuery.js</option>
+	<option value="jqueryui">ui.jQuery.js</option>
+  </optgroup>
+  <optgroup label="Other files">
+	<option value="somefile">Some unknown file</option>
+	<option value="someotherfile">Some other file with a very long option text</option>
+  </optgroup>
+</select>
+
+<!-- END: Selectmenu HTML -->
+
+</div>
+
+<script>$(document).ready(function(){
+			
+	$('#btn_jqSelectmenu').on('click', function(e){
+		e.preventDefault();
+		
+		requirejs(['jq/selectmenu'], function() {
+			$('#jq_Selectmenu').selectmenu({
+				create: function(e, ui){
+					$(e.target).next().addClass('form-control');
+				}
+			});
+		});	
+	});	
+	
+});</script>
+
+	<div class="wrapper-btn">
+		<button id="btn_jqSelectmenu" class="btn btn-warning pull-left btn-init" type="button">Init <b>.selectmenu()</b></button>
+	</div>
+	<div class="wrapper-ref">
+	Ref: <a href="http://jqueryui.com/selectmenu" target="_blank">http://jqueryui.com/selectmenu/</a>
+	</div>
+
+</div>
+
+
+
+
+
+<div class="wrapper-component">
+<a name="jqSlider"></a>
+<h3>.slider()</h3>
+<div class="wrapper-html">
+
+<!-- Slider HTML -->
+
+<label for="jq_Slider_amount">Price range:</label>
+<input type="text" id="jq_Slider_amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+ 
+<div id="jq_Slider" style="margin:20px 8px 10px;"></div>
+
+<!-- END: Slider HTML -->
+
+</div>
+
+<script>$(document).ready(function(){
+			
+	$('#btn_jqSlider').on('click', function(e){
+		e.preventDefault();
+		
+		requirejs(['jq/slider'], function() {
+			$( "#jq_Slider" ).slider({
+				range: true,
+				min: 0,
+				max: 500,
+				values: [ 75, 300 ],
+				slide: function( event, ui ) {
+					$( "#jq_Slider_amount" )
+						.val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+				}
+			});
+			
+			$( "#jq_Slider_amount" ).val( "$" + 
+				$( "#jq_Slider" ).slider( "values", 0 ) + " - $" + 
+				$( "#jq_Slider" ).slider( "values", 1 ) 
+			);
+		});	
+	});	
+	
+});</script>
+
+	<div class="wrapper-btn">
+		<button id="btn_jqSlider" class="btn btn-warning pull-left btn-init" type="button">Init <b>.slider()</b></button>
+	</div>
+	<div class="wrapper-ref">
+	Ref: <a href="http://jqueryui.com/slider" target="_blank">http://jqueryui.com/slider/</a>
+	</div>
+
+</div>
+
+
+
+
+
+<div class="wrapper-component">
+<a name="jqSpinner"></a>
+<h3>.spinner()</h3>
+<div class="wrapper-html jq-spinner">
+
+<!-- Spinner HTML -->
+
+<input id="jq_Spinner" value="12" />
+
+<div style="margin-top:20px;">
+
+	<button id="jqSpinner_disable" class="btn btn-info">Toggle disable/enable</button>
+	<button id="jqSpinner_destroy" class="btn btn-info">Toggle widget</button>
+
+	<button id="jqSpinner_getvalue" class="btn btn-info">Get value</button>
+	<button id="jqSpinner_setvalue" class="btn btn-info">Set value to 5</button>
+
+</div>
+
+<!-- END: Spinner HTML -->
+
+</div>
+
+<script>$(document).ready(function(){
+			
+	$('#btn_jqSpinner').on('click', function(e){
+		e.preventDefault();
+		
+		requirejs(['jq/spinner'], function() {
+			var $spinner = $( "#jq_Spinner" ).spinner();
+
+			$( "#jqSpinner_disable" ).click(function() {
+				if ( !$spinner.spinner( "instance" ) ) {
+					$spinner.spinner();
+				}
+				
+				if ( $spinner.spinner( "option", "disabled" ) ) {
+					$spinner.spinner( "enable" );
+				} else {
+					$spinner.spinner( "disable" );
+				}
+			});
+			
+			$( "#jqSpinner_destroy" ).click(function() {
+				if ( $spinner.spinner( "instance" ) ) {
+					$spinner.spinner( "destroy" );
+				} else {
+					$spinner.spinner();
+				}
+			});
+			
+			$( "#jqSpinner_getvalue" ).click(function() {
+				alert( $spinner.spinner( "value" ) );
+			});
+			
+			$( "#jqSpinner_setvalue" ).click(function() {
+				$spinner.spinner( "value", 5 );
+			});		 
+
+		});	
+	});	
+	
+});</script>
+
+	<div class="wrapper-btn">
+		<button id="btn_jqSpinner" class="btn btn-warning pull-left btn-init" type="button">Init <b>.spinner()</b></button>
+	</div>
+	<div class="wrapper-ref">
+	Ref: <a href="http://jqueryui.com/spinner" target="_blank">http://jqueryui.com/spinner/</a>
+	</div>
+
+</div>
+
+
+
+<div class="wrapper-component">
+<a name="jqTabs"></a>
+<h3>.tabs()</h3>
+<div class="wrapper-html">
+
+<!-- Tabs HTML -->
+
+<div id="jq_Tabs">
+  <ul>
+    <li><a href="#tabs-1">Nunc tincidunt</a></li>
+    <li><a href="#tabs-2">Proin dolor</a></li>
+    <li><a href="#tabs-3">Aenean lacinia</a></li>
+  </ul>
+  <div id="tabs-1">
+    <p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.</p>
+  </div>
+  <div id="tabs-2">
+    <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
+  </div>
+  <div id="tabs-3">
+    <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
+    <p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+  </div>
+</div>
+
+<!-- END: Tabs HTML -->
+
+</div>
+
+<script>$(document).ready(function(){
+			
+	$('#btn_jqTabs').on('click', function(e){
+		e.preventDefault();
+		
+		requirejs(['jq/tabs'], function() {
+			$('#jq_Tabs').tabs();
+		});	
+	});	
+	
+});</script>
+
+	<div class="wrapper-btn">
+		<button id="btn_jqTabs" class="btn btn-warning pull-left btn-init" type="button">Init <b>.tabs()</b></button>
+	</div>
+	<div class="wrapper-ref">
+	Ref: <a href="http://jqueryui.com/tabs" target="_blank">http://jqueryui.com/tabs/</a>
+	</div>
+
+</div>
+
+
+
+
+<div class="wrapper-component">
+<a name="jqTooltip"></a>
+<h3>.tooltip()</h3>
+<div class="wrapper-html">
+
+<!-- Tooltip HTML -->
+
+<p><a href="#" title="That&apos;s what this widget is">Tooltips</a> can be attached to any element. When you hover the element with your mouse, the title attribute is displayed in a little box next to the element, just like a native tooltip.</p>
+
+<p>But as it's not a native tooltip, it can be styled. Any themes built with <a href="http://jqueryui.com/themeroller/" title="ThemeRoller: jQuery UI&apos;s theme builder application">ThemeRoller</a> will also style tooltips accordingly.</p>
+
+<p>Tooltips are also useful for form elements, to show some additional information in the context of each field.</p>
+
+<form class="form-inline">
+	<label for="jqTooltip_age">Your age:&nbsp;</label>
+	<input id="jqTooltip_age" class="form-control" title="We ask for your age only for statistical purposes." />
+	&nbsp;&nbsp;Hover the field to see the tooltip.
+</form>
+
+<!-- END: Tooltip HTML -->
+
+</div>
+
+<script>$(document).ready(function(){
+			
+	$('#btn_jqTooltip').on('click', function(e){
+		e.preventDefault();
+		
+		requirejs(['jq/tooltip'], function() {
+			$(document).tooltip();
+		});	
+	});	
+	
+});</script>
+
+	<div class="wrapper-btn">
+		<button id="btn_jqTooltip" class="btn btn-warning pull-left btn-init" type="button">Init <b>.tooltip()</b></button>
+	</div>
+	<div class="wrapper-ref">
+	Ref: <a href="http://jqueryui.com/tooltip" target="_blank">http://jqueryui.com/tooltip/</a>
+	</div>
+
+</div>
+
+
+
+
+<div class="wrapper-component">
+<a name="jqDraggable"></a>
+<h3>.draggable()</h3>
+<div class="wrapper-html">
+
+<!-- Draggable HTML -->
+
+<div id="jq_Draggable" class="ui-widget-content" style="width: 150px; height: 150px; padding: 0.5em;">
+  <p>Drag me around</p>
+</div>
+
+<!-- END: Draggable HTML -->
+
+</div>
+
+<script>$(document).ready(function(){
+			
+	$('#btn_jqDraggable').on('click', function(e){
+		e.preventDefault();
+		
+		requirejs(['jq/draggable'], function() {
+			$('#jq_Draggable').draggable();
+		});	
+	});	
+	
+});</script>
+
+	<div class="wrapper-btn">
+		<button id="btn_jqDraggable" class="btn btn-warning pull-left btn-init" type="button">Init <b>.draggable()</b></button>
+	</div>
+	<div class="wrapper-ref">
+	Ref: <a href="http://jqueryui.com/draggable" target="_blank">http://jqueryui.com/draggable/</a>
+	</div>
+
+</div>
+
+
+
+
+<div class="wrapper-component">
+<a name="jqDroppable"></a>
+<h3>.droppable()</h3>
+<div class="wrapper-html">
+
+<!-- Droppable HTML -->
+
+<div id="jq_Droppable_drag" class="ui-widget-content" style="width: 100px; height: 100px; padding: 0.5em; float: left; margin: 10px 10px 10px 0;">
+	<p>Drag me to my target</p>
+</div>
+ 
+<div id="jq_Droppable_drop" class="ui-widget-header" style="width: 150px; height: 150px; padding: 0.5em; float: left; margin: 10px;">
+	<p>Drop here</p>
+</div>
+
+<!-- END: Droppable HTML -->
+
+</div>
+
+<script>$(document).ready(function(){
+			
+	$('#btn_jqDroppable').on('click', function(e){
+		e.preventDefault();
+		
+		requirejs(['jq/droppable'], function() {
+			$("#jq_Droppable_drag").draggable();
+			$("#jq_Droppable_drop").droppable({
+				drop: function( event, ui ) {
+					$( this ).addClass( "ui-state-highlight" )
+						.find( "p" ).html( "Dropped!" );
+				}
+			});
+		});	
+	});	
+	
+});</script>
+
+	<div class="wrapper-btn">
+		<button id="btn_jqDroppable" class="btn btn-warning pull-left btn-init" type="button">Init <b>.droppable()</b></button>
+	</div>
+	<div class="wrapper-ref">
+	Ref: <a href="http://jqueryui.com/droppable" target="_blank">http://jqueryui.com/droppable/</a>
+	</div>
+
+</div>
+
+
+
+
+<div class="wrapper-component">
+<a name="jqResizable"></a>
+<h3>.resizable()</h3>
+<div class="wrapper-html">
+
+<!-- Resizable HTML -->
+
+<div id="jq_Resizable" class="ui-widget-content" style="width:40%;height:150px;padding:0.3em;">
+	<h4 class="ui-widget-header" style="text-align:center;margin:0;padding:0.3em 0;">Resizable</h4>
+</div>
+
+<!-- END: Resizable HTML -->
+
+</div>
+
+<script>$(document).ready(function(){
+			
+	$('#btn_jqResizable').on('click', function(e){
+		e.preventDefault();
+		
+		requirejs(['jq/resizable'], function() {
+			$('#jq_Resizable').resizable({
+				handles: 'se'
+			})
+		});	
+	});	
+	
+});</script>
+
+	<div class="wrapper-btn">
+		<button id="btn_jqResizable" class="btn btn-warning pull-left btn-init" type="button">Init <b>.resizable()</b></button>
+	</div>
+	<div class="wrapper-ref">
+	Ref: <a href="http://jqueryui.com/resizable" target="_blank">http://jqueryui.com/resizable/</a>
+	</div>
+
+</div>
+
+
+
+
+<div class="wrapper-component">
+<a name="jqSelectable"></a>
+<h3>.selectable()</h3>
+<div class="wrapper-html">
+
+<!-- Selectable HTML -->
+
+<p id="jqSelectable_feedback">
+	<span>You've selected:</span> <span id="jqSelectable_result">none</span>.
+</p>
+ 
+<ol id="jq_Selectable">
+	<li class="ui-widget-content">Item 1</li>
+	<li class="ui-widget-content">Item 2</li>
+	<li class="ui-widget-content">Item 3</li>
+	<li class="ui-widget-content">Item 4</li>
+	<li class="ui-widget-content">Item 5</li>
+	<li class="ui-widget-content">Item 6</li>
+</ol>
+
+<style>
+	#jq_Selectable .ui-selecting { background: #FECA40; }
+	#jq_Selectable .ui-selected { background: #F39814; color: white; }
+	#jq_Selectable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+	#jq_Selectable li { margin: 3px; padding: 0.4em; }
+</style>
+
+<!-- END: Selectable HTML -->
+
+</div>
+
+<script>$(document).ready(function(){
+			
+	$('#btn_jqSelectable').on('click', function(e){
+		e.preventDefault();
+		
+		requirejs(['jq/selectable'], function() {
+			$( "#jq_Selectable" ).selectable({
+				stop: function() {
+					var result = $( "#jqSelectable_result" ).empty();
+					$( ".ui-selected", this ).each(function() {
+						var index = $( "#jq_Selectable li" ).index( this );
+						result.append( " #" + ( index + 1 ) );
+					});
+				}
+			});
+		});	
+	});	
+	
+});</script>
+
+	<div class="wrapper-btn">
+		<button id="btn_jqSelectable" class="btn btn-warning pull-left btn-init" type="button">Init <b>.selectable()</b></button>
+	</div>
+	<div class="wrapper-ref">
+	Ref: <a href="http://jqueryui.com/selectable" target="_blank">http://jqueryui.com/selectable/</a>
+	</div>
+
+</div>
+
+
+
+
+<div class="wrapper-component">
+<a name="jqSortable"></a>
+<h3>.sortable()</h3>
+<div class="wrapper-html">
+
+<!-- Selectable HTML -->
+
+<ul id="jq_Sortable" class="list-group">
+	<li class="ui-state-default list-group-item">Item 1</li>
+	<li class="ui-state-default list-group-item">Item 2</li>
+	<li class="ui-state-default list-group-item">Item 3</li>
+	<li class="ui-state-default list-group-item">Item 4</li>
+	<li class="ui-state-default list-group-item">Item 5</li>
+	<li class="ui-state-default list-group-item">Item 6</li>
+	<li class="ui-state-default list-group-item">Item 7</li>
+</ul>
+
+<!-- END: Selectable HTML -->
+
+</div>
+
+<script>$(document).ready(function(){
+			
+	$('#btn_jqSortable').on('click', function(e){
+		e.preventDefault();
+		
+		requirejs(['jq/sortable'], function() {
+			$( "#jq_Sortable" )
+				.sortable({ placeholder: "ui-state-highlight" })
+				.disableSelection();
+		});	
+	});	
+	
+});</script>
+
+	<div class="wrapper-btn">
+		<button id="btn_jqSortable" class="btn btn-warning pull-left btn-init" type="button">Init <b>.sortable()</b></button>
+	</div>
+	<div class="wrapper-ref">
+	Ref: <a href="http://jqueryui.com/sortable" target="_blank">http://jqueryui.com/sortable/</a>
+	</div>
+
+</div>
+
+
+
+<a name="changyan"></a>
+<div id="SOHUCS"></div>
+<script charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window._config = { showScore: true };
+    window.changyan.api.config({
+        appid: 'cysgWs8wV',
+        conf: 'prod_008b98c0fda99479130e01f9e1bbfa46'
+    });
+</script> 
+
+
+
+
+</div>
+<!-- END: right col -->
+</div>
+<!-- END: container-fluid row -->
+
+
+<script src="js/util/prettify/run_prettify.js?autoload=false&skin=desert" defer="defer"></script>
+
+</body>
+</html>
