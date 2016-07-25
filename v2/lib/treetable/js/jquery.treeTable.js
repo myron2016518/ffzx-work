@@ -158,7 +158,8 @@
 						isReordered = true;						
 					}
 					
-				}, 10 * ttlDone);
+				//}, 10 * ttlDone);
+				}, 0);
 			};
 			
 			//构造父子关系

@@ -101,7 +101,22 @@ define(['ff/validate_core'], function() {
     jQuery.validator.addMethod("decimal", function(value, element) {
     var decimal = /^-?\d+(\.\d{1,2})?$/;
     return this.optional(element) || (decimal.test(value));
-    }, "数字类型，小数位数不能超过两位");  
+    }, "数字类型，小数位数不能超过两位");
+	
+	// 验证值小数位数不能超过四位
+    jQuery.validator.addMethod("decimalFour", function(value, element) {
+    var decimal = /^-?\d+(\.\d{1,4})?$/;
+    return this.optional(element) || (decimal.test(value));
+    }, "数字类型，小数位数不能超过四位");
+	
+	// 验证值小数的整数位数不能超过 n 位，小数部分不能超过 m 位
+    jQuery.validator.addMethod("decimalCustom", function(value, element, param) {
+		var arr = param.split(',');
+		var intLen = parseInt($.trim(arr[0]));
+		var decimalLen = parseInt($.trim(arr[1]));
+		var decimalCustom = new RegExp("^-?\\d{1,"+ intLen +"}(\\.\\d{1,"+ decimalLen +"})?$");
+		return this.optional(element) || (decimalCustom.test(value));
+    }, $.validator.format("数字类型，整数位数和小数位数分别不能超过 {0} 位"));
     
     // 必须以特定字符串开头验证
     jQuery.validator.addMethod("begin", function(value, element, param) {
@@ -278,4 +293,3 @@ define(['ff/validate_core'], function() {
     }
 
 });
-

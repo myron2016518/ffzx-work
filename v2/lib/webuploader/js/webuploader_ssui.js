@@ -32,6 +32,14 @@ define(['ff/webuploader_core'], function(WebUploader) {
 		// Callbacks for uploading images
 		if (type == 'image') {
 			
+			// 当有文件添加进来之前
+			uploader.on( 'beforeFileQueued', function( file ) {
+
+				if ($.isFunction(obj.callback.beforeFileQueued)) {
+					obj.callback.beforeFileQueued(file);
+				}
+			});
+			
 			// 当有文件添加进来的时候
 			uploader.on( 'fileQueued', function( file ) {
 				var $li = $(
@@ -143,6 +151,14 @@ define(['ff/webuploader_core'], function(WebUploader) {
 		
 		// Callbacks for uploading files
 		if (type == 'file') {
+			
+			// 当有文件添加进来之前
+			uploader.on( 'beforeFileQueued', function( file ) {
+
+				if ($.isFunction(obj.callback.beforeFileQueued)) {
+					obj.callback.beforeFileQueued(file);
+				}
+			});
 			
 			// 当有文件添加进来的时候
 			uploader.on( 'fileQueued', function( file ) {

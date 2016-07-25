@@ -5560,8 +5560,9 @@
 			tmpTable.find('tfoot th, tfoot td').css('width', '');
 	
 			// Apply custom sizing to the cloned header
-			headerCells = _fnGetUniqueThs( oSettings, tmpTable.find('thead')[0] );
-	
+			headerCells = _fnGetUniqueThs( oSettings, tmpTable.find('tfoot')[0] );
+			// headerCells = _fnGetUniqueThs( oSettings, tmpTable.find('thead')[0] );
+
 			for ( i=0 ; i<visibleColumns.length ; i++ ) {
 				column = columns[ visibleColumns[i] ];
 	

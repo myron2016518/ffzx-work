@@ -403,6 +403,8 @@ No HTML needed.
 	Ref: <a href="https://www.datatables.net/examples/" target="_blank">https://www.datatables.net/examples/</a>
 	<br />
 	<a href="https://datatables.net/reference/api/ajax.url%28%29.load%28%29" target="_blank">通过 AJAX 载入新数据</a>	
+	<br />
+	<a href="http://datatables.club/" target="_blank">Datatables 中文网</a>	
 </div>
 
 </div>
@@ -839,6 +841,11 @@ No HTML needed.
 
 	var webuploader_callback = {
 				
+		// Before single file selected
+		beforeFileQueued: function(file){
+			//console.log(uploaderInstance.getStats())
+		},
+				
 		// When single file selected
 		fileQueued: function(file){ },
 		
@@ -866,9 +873,9 @@ No HTML needed.
 				
 	$('#btn_ffWebUploader').on('click', function(){
 
-		requirejs(['ff/webuploader'], function(webuploader){
+		// init image uploader
+		requirejs(['ff/webuploader'], function(webuploader){			
 			
-			// init image uploader
 			webuploader({
 				
 				type: 'image', // type: image, file
@@ -880,14 +887,22 @@ No HTML needed.
 					//mimeTypes: 'image/*' // If only images are allowed strictly
 				},
 				callback: webuploader_callback
-			});
+			});			
 			
-			// init file uploader
+			// webuploader.instance.removeFile(file.id)			
+		});		
+
+		// init file uploader
+		requirejs(['ff/webuploader'], function(webuploader){
+			
 			webuploader({
 				
 				type: 'file', // type: image, file
 				list: '#ff_WebUploader_fileList',
-				pick: '#ff_WebUploader_filePicker',
+				pick: {
+					id: '#ff_WebUploader_filePicker',
+					multiple: false // If you want users to select single file only
+				},
 				server: '/', // Backend script receiving the file(s)
 				accept: {					
 					//extensions: 'doc,docx,ppt,pptx' // 英文逗号前后不要有空格！
@@ -895,8 +910,7 @@ No HTML needed.
 				callback: webuploader_callback
 			});
 			
-			// webuploader.instance.removeFile(file.id)
-			
+			// webuploader.instance.removeFile(file.id)			
 		});
 		
 	});
@@ -1705,7 +1719,17 @@ No HTML needed.
 		
 		requirejs(['jq/autocomplete'], function() {
 			$('#jq_Autocomplete').autocomplete({
-				source: availableTags
+				source: availableTags,
+				change: function(event, ui){
+					var val = $(this).val();
+					var isInArry = $.inArray(val, availableTags) > -1;
+					
+					// Force to select from suggested list
+					if (!isInArry) {
+						$(this).val('');
+						return false;
+					}
+				}
 			});
 		});	
 	});	
